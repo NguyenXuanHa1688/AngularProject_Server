@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -60,20 +61,20 @@ namespace WebApp.Controllers
                 //{
                 //    return BadRequest("CANNOT FIND USER");
                 //}
+                string msg = "WRONG PASSWORD";
                 if( acc.UserName == request.UserName)
                 {
                     if (!VerifyPasswordHash(request.Password, acc.PasswordHash, acc.PasswordSalt))
                     {
-                        return BadRequest("WRONG PASSWORD");
+                        return BadRequest(new {msg});
                     }
                     string token = CreateToken(acc);
-                    return Ok(token);
+                    return Ok(new{ token } );
                 }               
                 //string token = CreateToken(request);
             }
             return BadRequest("CANNOT FIND USER");
         }
-
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
