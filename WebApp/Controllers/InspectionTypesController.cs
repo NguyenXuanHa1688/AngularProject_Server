@@ -13,7 +13,6 @@ namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class InspectionTypesController : ControllerBase
     {
         private readonly DataContext _context;

@@ -2,11 +2,14 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebApp.Data;
 using WebApp.Models;
+using System.Linq;
 
 namespace WebApp.Controllers
 {
@@ -27,15 +30,21 @@ namespace WebApp.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(UserDto request)
         {
+            LogActivities log = new();
             if(_context.UserDto == null)
             {
                 return NotFound();
             }
             var existedAcc = _context.User;
-            foreach (var acc in existedAcc)
+            foreach (var acc in existedAcc.ToList())
             {
                 if (acc.UserName == request.UserName)
                 {
+                    log.User = request.UserName;
+                    log.Action = "Sign up";
+                    log.Status = "Failed";
+                    _context.LogActivities.Add(log);
+                    await _context.SaveChangesAsync();
                     return BadRequest("USER ALREADY EXIST");
                 }
 
@@ -43,43 +52,83 @@ namespace WebApp.Controllers
             User user = new();
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.UserName = request.UserName;
+            user.Role = request.Role;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             _context.UserDto.Add(request);
             _context.User.Add(user);
+
+            //log activity 
+            log.User = request.UserName;
+            log.Action = "Sign up";
+            log.Status = "Success";
+            _context.LogActivities.Add(log);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+
+        [HttpGet("filteruser")]
+        public async Task<IActionResult> getLogUser(string request)
+        {
+            var product = _context.LogActivities.Where(l => (l.User.Contains(request)));
+            return Ok(product);
         }
 
         [HttpPost("login")]
         public async Task<ActionResult> Login(UserDto request)
         {
+            LogActivities log = new();
             var existedAcc = _context.User;
-            foreach (var acc in existedAcc)
+            foreach (var acc in existedAcc.ToList())
             {
                 //if (acc.UserName != request.UserName)
                 //{
                 //    return BadRequest("CANNOT FIND USER");
                 //}
-                string msg = "WRONG PASSWORD";
                 if( acc.UserName == request.UserName)
                 {
                     if (!VerifyPasswordHash(request.Password, acc.PasswordHash, acc.PasswordSalt))
                     {
-                        return BadRequest(new {msg});
+                        log.User = request.UserName;
+                        log.Status = "Failed";
+                        log.Action = "Login";
+                        _context.LogActivities.Add(log);
+                        await _context.SaveChangesAsync();
+                        return BadRequest("WRONG PASSWORD");
                     }
+                    log.User = request.UserName;
+                    log.Status = "Success";
+                    log.Action = "Login";
+                    _context.LogActivities.Add(log);
+                    await _context.SaveChangesAsync();
                     string token = CreateToken(acc);
                     return Ok(new{ token } );
                 }               
                 //string token = CreateToken(request);
             }
+            log.User = request.UserName;
+            log.Status = "Failed";
+            log.Action = "Login";
+            _context.LogActivities.Add(log);
+            await _context.SaveChangesAsync();
             return BadRequest("CANNOT FIND USER");
         }
+
+        [HttpGet("getuser"), Authorize]
+        public ActionResult<string> GetUser()
+        {
+            var currentUserName = User.FindFirstValue(ClaimTypes.Name);
+            var currentUserRole = User.FindFirstValue(ClaimTypes.Role);
+            return Ok(new {currentUserName, currentUserRole});
+        }
+
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Role, user.Role)
         };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppToken:Token").Value));
 
