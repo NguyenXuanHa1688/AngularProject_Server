@@ -100,20 +100,29 @@ namespace WebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserDto(int id)
         {
-            if (_context.UserDto == null)
+            if (_context.UserDto == null && _context.User == null)
             {
                 return NotFound();
             }
             var userDto = await _context.UserDto.FindAsync(id);
-            if (userDto == null)
+            var user = await _context.User.FindAsync(id);
+            if (userDto == null && user == null)
             {
                 return NotFound();
             }
 
             _context.UserDto.Remove(userDto);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("finduser")]
+        public async Task<IActionResult> getLogUser(string request)
+        {
+            var product = _context.UserDto.Where(l => (l.UserName.Contains(request)));
+            return Ok(product);
         }
 
         private bool UserDtoExists(int id)

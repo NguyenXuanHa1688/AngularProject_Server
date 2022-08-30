@@ -268,3 +268,9 @@ D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBe
 D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\MailKit.dll
 D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\MimeKit.dll
 D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.MessagePack.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\System.IO.Pipelines.dll
+D:\vnpt\WebApp\WebApp\bin\Debug\net6.0\System.Net.WebSockets.WebSocketProtocol.dll
