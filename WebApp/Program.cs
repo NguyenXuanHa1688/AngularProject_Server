@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: myAllow, builder =>
     {
-        builder.WithOrigins("https/localhost:4200/").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+        builder.WithOrigins("https/localhost:4200/").AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed(_ => true);
     });
 });
 
