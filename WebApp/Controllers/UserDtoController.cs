@@ -121,8 +121,8 @@ namespace WebApp.Controllers
         [HttpGet("finduser")]
         public async Task<IActionResult> getLogUser(string request)
         {
-            var product = _context.UserDto.Where(l => (l.UserName.Contains(request)));
-            return Ok(product);
+            var user = _context.UserDto.Where(l => (l.UserName.Contains(request)));
+            return Ok(user);
         }
 
         private bool UserDtoExists(int id)

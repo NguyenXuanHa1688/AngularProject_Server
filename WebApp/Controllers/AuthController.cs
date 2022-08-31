@@ -123,6 +123,34 @@ namespace WebApp.Controllers
             return Ok(new {currentUserName, currentUserRole});
         }
 
+        [HttpPut("updateProfile")]
+        public async Task<ActionResult> updateProfile(int id, UserDto request)
+        {
+            if (_context.UserDto == null)
+            {
+                return NotFound();
+            }
+            if (id != request.Id)
+            {
+                return BadRequest();
+            }
+            User user = new();
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            user.UserName = request.UserName;
+            user.Role = request.Role;
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            user.Id = request.Id;
+
+            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(request).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
