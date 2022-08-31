@@ -12,6 +12,7 @@ namespace WebApp.Data
         public DbSet<InspectionType> InspectionTypes { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LogActivities> LogActivities { get; set; }
+        public DbSet<game> game { get; set; }
 
     }
 }
