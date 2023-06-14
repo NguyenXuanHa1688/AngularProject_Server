@@ -46,9 +46,6 @@ namespace WebApp.Controllers
 
             }
             return BadRequest("NO USER MATCH THE DATABASE");
-            
-
-            
         }
     }
 }

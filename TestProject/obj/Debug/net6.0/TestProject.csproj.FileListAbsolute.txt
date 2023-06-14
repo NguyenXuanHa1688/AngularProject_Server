@@ -1,0 +1,6 @@
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\obj\Debug\net6.0\TestProject.csproj.AssemblyReference.cache
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\obj\Debug\net6.0\TestProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\obj\Debug\net6.0\TestProject.AssemblyInfoInputs.cache
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\obj\Debug\net6.0\TestProject.AssemblyInfo.cs
+C:\Users\haxuannguyen\source\repos\AngularProject_Server\TestProject\obj\Debug\net6.0\TestProject.csproj.CoreCompileInputs.cache

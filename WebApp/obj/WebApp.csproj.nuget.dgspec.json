@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\vnpt\\WebApp\\WebApp\\WebApp.csproj": {}
+    "C:\\Users\\haxuannguyen\\source\\repos\\AngularProject_Server\\WebApp\\WebApp.csproj": {}
   },
   "projects": {
-    "D:\\vnpt\\WebApp\\WebApp\\WebApp.csproj": {
+    "C:\\Users\\haxuannguyen\\source\\repos\\AngularProject_Server\\WebApp\\WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\vnpt\\WebApp\\WebApp\\WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\haxuannguyen\\source\\repos\\AngularProject_Server\\WebApp\\WebApp.csproj",
         "projectName": "WebApp",
-        "projectPath": "D:\\vnpt\\WebApp\\WebApp\\WebApp.csproj",
-        "packagesPath": "C:\\Users\\billg\\.nuget\\packages\\",
-        "outputPath": "D:\\vnpt\\WebApp\\WebApp\\obj\\",
+        "projectPath": "C:\\Users\\haxuannguyen\\source\\repos\\AngularProject_Server\\WebApp\\WebApp.csproj",
+        "packagesPath": "C:\\Users\\haxuannguyen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\haxuannguyen\\source\\repos\\AngularProject_Server\\WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\billg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\haxuannguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -103,7 +104,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -115,7 +117,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

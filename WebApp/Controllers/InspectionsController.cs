@@ -27,10 +27,10 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Inspection>>> GetInspections()
         {
-          if (_context.Inspections == null)
-          {
-              return NotFound();
-          }
+            if (_context.Inspections == null)
+            {
+                return NotFound();
+            }
             return await _context.Inspections.ToListAsync();
         }
 
@@ -118,7 +118,7 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
-        private bool InspectionExists(int id)
+        public bool InspectionExists(int id)
         {
             return (_context.Inspections?.Any(e => e.Id == id)).GetValueOrDefault();
         }
